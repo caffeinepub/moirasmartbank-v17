@@ -1,0 +1,382 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --radius: 0.375rem;
+    /* Dark sci-fi palette */
+    --background: 0.09 0.025 245;
+    --foreground: 0.92 0.015 220;
+    --card: 0.12 0.03 240;
+    --card-foreground: 0.92 0.015 220;
+    --popover: 0.14 0.035 240;
+    --popover-foreground: 0.92 0.015 220;
+    --primary: 0.82 0.18 200;
+    --primary-foreground: 0.08 0.02 240;
+    --secondary: 0.18 0.04 230;
+    --secondary-foreground: 0.85 0.015 220;
+    --muted: 0.16 0.03 235;
+    --muted-foreground: 0.55 0.05 225;
+    --accent: 0.78 0.2 200;
+    --accent-foreground: 0.08 0.02 240;
+    --destructive: 0.62 0.25 25;
+    --destructive-foreground: 0.98 0 0;
+    --border: 0.25 0.05 230;
+    --input: 0.22 0.04 235;
+    --ring: 0.82 0.18 200;
+    --chart-1: 0.82 0.18 200;
+    --chart-2: 0.75 0.2 145;
+    --chart-3: 0.62 0.25 25;
+    --chart-4: 0.78 0.15 290;
+    --chart-5: 0.72 0.18 60;
+    --sidebar: 0.1 0.025 245;
+    --sidebar-foreground: 0.92 0.015 220;
+    --sidebar-primary: 0.82 0.18 200;
+    --sidebar-primary-foreground: 0.08 0.02 240;
+    --sidebar-accent: 0.18 0.04 230;
+    --sidebar-accent-foreground: 0.85 0.015 220;
+    --sidebar-border: 0.25 0.05 230;
+    --sidebar-ring: 0.82 0.18 200;
+    /* Custom tokens */
+    --hud-cyan: oklch(0.82 0.18 200);
+    --hud-blue: oklch(0.58 0.22 250);
+    --hud-red: oklch(0.62 0.25 25);
+    --hud-gold: oklch(0.76 0.14 75);
+    --hud-bg: oklch(0.09 0.025 245);
+    --hud-panel: oklch(0.12 0.03 240);
+    --hud-border: oklch(0.25 0.05 230);
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+    font-family: "Rajdhani", sans-serif;
+    overflow: hidden;
+  }
+}
+
+/* ===== ANIMATIONS ===== */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes rotate-slow-reverse {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(-360deg);
+  }
+}
+@keyframes rotate-medium {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes pulse-glow {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 20px 6px oklch(0.82 0.18 200 / 0.6), 0 0 60px 20px
+      oklch(0.82 0.18 200 / 0.2);
+  }
+  50% {
+    opacity: 0.7;
+    box-shadow: 0 0 40px 15px oklch(0.82 0.18 200 / 0.8), 0 0 100px 40px
+      oklch(0.82 0.18 200 / 0.3);
+  }
+}
+@keyframes pulse-glow-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 15px 4px oklch(0.76 0.14 75 / 0.5), 0 0 40px 12px
+      oklch(0.76 0.14 75 / 0.2);
+  }
+  50% {
+    box-shadow: 0 0 30px 10px oklch(0.76 0.14 75 / 0.7), 0 0 70px 25px
+      oklch(0.76 0.14 75 / 0.3);
+  }
+}
+@keyframes pulse-red {
+  0%,
+  100% {
+    opacity: 1;
+    box-shadow: 0 0 20px 6px oklch(0.62 0.25 25 / 0.6);
+  }
+  50% {
+    opacity: 0.6;
+    box-shadow: 0 0 40px 15px oklch(0.62 0.25 25 / 0.9);
+  }
+}
+@keyframes scan-sweep {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes ticker-scroll {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+@keyframes node-pulse {
+  0%,
+  100% {
+    opacity: 0.5;
+    r: 3;
+  }
+  50% {
+    opacity: 1;
+    r: 5;
+  }
+}
+@keyframes radar-arc {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+@keyframes flash-red {
+  0%,
+  100% {
+    background-color: oklch(0.12 0.03 240);
+  }
+  50% {
+    background-color: oklch(0.2 0.08 25);
+  }
+}
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.2;
+  }
+}
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  10% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes waveform-bar {
+  0%,
+  100% {
+    transform: scaleY(0.2);
+  }
+  50% {
+    transform: scaleY(1);
+  }
+}
+@keyframes ring-pulse {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+@keyframes hiae-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0px oklch(0.62 0.25 25 / 0);
+  }
+  50% {
+    box-shadow: 0 0 60px oklch(0.62 0.25 25 / 0.9), inset 0 0 40px
+      oklch(0.62 0.25 25 / 0.2);
+  }
+}
+@keyframes trust-cycle {
+  0%,
+  20% {
+    opacity: 1;
+  }
+  25%,
+  95% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes breach-bar {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+.animate-rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+.animate-rotate-slow-reverse {
+  animation: rotate-slow-reverse 30s linear infinite;
+}
+.animate-rotate-medium {
+  animation: rotate-medium 8s linear infinite;
+}
+.animate-rotate-fast {
+  animation: rotate-medium 3s linear infinite;
+}
+.animate-pulse-glow {
+  animation: pulse-glow 2.5s ease-in-out infinite;
+}
+.animate-pulse-glow-gold {
+  animation: pulse-glow-gold 2s ease-in-out infinite;
+}
+.animate-pulse-red {
+  animation: pulse-red 1s ease-in-out infinite;
+}
+.animate-ticker {
+  animation: ticker-scroll 40s linear infinite;
+}
+.animate-scan {
+  animation: scan-sweep 3s linear infinite;
+}
+.animate-radar {
+  animation: radar-arc 4s linear infinite;
+}
+.animate-flash-red {
+  animation: flash-red 0.8s ease-in-out infinite;
+}
+.animate-blink {
+  animation: blink 1.2s ease-in-out infinite;
+}
+.animate-hiae-pulse {
+  animation: hiae-pulse 0.8s ease-in-out infinite;
+}
+
+/* Grid background */
+.hud-grid-bg {
+  background-image: linear-gradient(
+      oklch(0.25 0.05 230 / 0.12) 1px,
+      transparent 1px
+    ), linear-gradient(90deg, oklch(0.25 0.05 230 / 0.12) 1px, transparent 1px);
+  background-size: 40px 40px;
+}
+
+/* Panel styling */
+.hud-panel {
+  background: oklch(0.12 0.03 240 / 0.95);
+  border: 1px solid oklch(0.25 0.05 230);
+  border-top: 2px solid oklch(0.82 0.18 200 / 0.6);
+}
+
+.hud-panel-red {
+  background: oklch(0.12 0.03 240 / 0.95);
+  border: 1px solid oklch(0.62 0.25 25 / 0.8);
+  border-top: 2px solid oklch(0.62 0.25 25);
+  animation: flash-red 0.8s ease-in-out infinite;
+}
+
+.orbitron {
+  font-family: "Orbitron", monospace;
+}
+.rajdhani {
+  font-family: "Rajdhani", sans-serif;
+}
+
+/* Scrollbar hide */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+/* ===== PRINT STYLES ===== */
+.print-only {
+  display: none !important;
+}
+
+@media print {
+  .no-print {
+    display: none !important;
+  }
+  .print-only {
+    display: block !important;
+  }
+  body {
+    background: #fff !important;
+    color: #000 !important;
+    margin: 0;
+    padding: 0;
+  }
+  @page {
+    size: A4;
+    margin: 2.5cm;
+  }
+
+  /* RBI Report: hide everything except the report modal */
+  .rbi-report-overlay {
+    position: static !important;
+    background: transparent !important;
+    padding: 0 !important;
+    overflow: visible !important;
+  }
+
+  .rbi-report-modal {
+    box-shadow: none !important;
+    width: 100% !important;
+    padding: 0 !important;
+    min-height: auto !important;
+  }
+
+  /* When RBI report is open, hide the main app */
+  body:has(.rbi-report-overlay) .no-print,
+  body:has(.rbi-report-overlay) [class*="hud"],
+  body:has(.rbi-report-overlay) [class*="orbitron"] {
+    display: none !important;
+  }
+}
+
+/* ===== V17 HIAE Acoustic Guard Alert ===== */
+@keyframes hiae-pulse {
+  0%,
+  100% {
+    box-shadow: 0 0 0px oklch(0.62 0.25 25 / 0);
+  }
+  50% {
+    box-shadow: 0 0 80px oklch(0.62 0.25 25 / 0.9), 0 0 120px
+      oklch(0.62 0.25 25 / 0.5), inset 0 0 40px oklch(0.62 0.25 25 / 0.15);
+  }
+}
+.animate-hiae-pulse {
+  animation: hiae-pulse 0.8s ease-in-out infinite;
+  border: 2px solid oklch(0.62 0.25 25 / 0.8) !important;
+}
